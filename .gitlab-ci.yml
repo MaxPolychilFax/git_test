@@ -4,9 +4,9 @@ stages:
 sync_to_github:
   stage: deploy
   only:
-    - for_github
+    - to_git
   script:
-    - git clone --branch for_github --single-branch "${CI_REPOSITORY_URL}" temp-repo
+    - git clone --branch to_git --single-branch "${CI_REPOSITORY_URL}" temp-repo
     - cd temp-repo
     - git remote add github "https://oauth2:$GITHUB_TOKEN@github.com/MaxPolychilFax/git_test.git"
     - git push --force github for_github:main  # или for_github:for_github, если нужно сохранить имя
