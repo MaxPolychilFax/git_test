@@ -1,0 +1,12 @@
+stages:
+  - deploy
+
+sync_to_github:
+  stage: deploy
+  only:
+    - to_git
+  script:
+    - git clone --mirror "${CI_REPOSITORY_URL}" temp-repo
+    - cd temp-repo
+    - git remote add github "https://oauth2:$GITHUB_TOKEN@github.com/MaxPolychilFax/git_test.git"
+    - git push --mirror --verbose github
