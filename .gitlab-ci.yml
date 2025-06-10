@@ -6,7 +6,8 @@ sync_to_github:
   only:
     - to_git
   script:
-    - git clone --branch to_git --single-branch "${CI_REPOSITORY_URL}" temp-repo
+    - git clone --branch to_git "${CI_REPOSITORY_URL}" temp-repo
     - cd temp-repo
-    - git remote add github "https://oauth2:$GITHUB_TOKEN@github.com/MaxPolychilFax/git_test.git"
-    - git push --force github to_git:main  # или for_github:for_github, если нужно сохранить имя
+    - git remote add github "https://oauth2:${GITHUB_TOKEN}@github.com/MaxPolychilFax/git_test.git"
+    - git fetch github main || echo "GitHub branch doesn't exist yet"  # Проверяем существование ветки на GitHub
+    - git diff --quiet github/main..to_git || git push github to_git:main  # Пушим только если есть различия
