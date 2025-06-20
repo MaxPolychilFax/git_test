@@ -21,9 +21,9 @@ jobs:
 
       - name: Push to GitLab
         env:
+          GITLAB_USERNAME: ${{ secrets.GITLAB_USERNAME }}
           GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
-          GITLAB_REPO: git@gitlab.com:maks_faks/to_github.git
         run: |
           BRANCH_NAME="pullrequest/${GITHUB_HEAD_REF}"
-          git remote add gitlab https://${GITLAB_TOKEN}@gitlab.com/maks_faks/to_github.git
+          git remote add gitlab https://${GITLAB_USERNAME}:${GITLAB_TOKEN}@gitlab.com/maks_faks/to_github.git
           git push gitlab HEAD:refs/heads/$BRANCH_NAME --force
