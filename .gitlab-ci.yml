@@ -10,4 +10,5 @@ sync_to_github:
     - cd temp-repo
     - git remote add github "https://oauth2:${GITHUB_TOKEN}@github.com/MaxPolychilFax/git_test.git"
     - git fetch github main || echo "GitHub branch doesn't exist yet"  # Проверяем существование ветки на GitHub
-    - git diff --quiet github/main..to_git || git push github to_git:main  # Пушим только если есть различия
+    - git push --force github to_git:main
+    #- git diff --quiet github/main..to_git || git push github to_git:main  # Пушим только если есть различия
